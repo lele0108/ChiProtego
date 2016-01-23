@@ -1,6 +1,6 @@
 var CRIMES_API = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
 
-
+Parse.initialize("bTjai3wsSTvMmBPCyLFjPUHHSQYOUt4qOecyE8eh", "P7ARareRYBpxqoaU6CrDXr8cP5vv6wkuykeub6Ee");
 
 var HeatMap = React.createClass({
   componentDidMount: function() {
@@ -8,6 +8,17 @@ var HeatMap = React.createClass({
     var heatmap = new google.maps.visualization.HeatmapLayer({
       data: this.props.points,
       map: map
+    });
+
+    var circle = new google.maps.Circle({
+      strokeColor: '#82CAFA',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#82CAFA',
+      fillOpacity: 0.35,
+      map: map,
+      center: {lat: 39.9521950, lng: -75.1911030},
+      radius: 250
     });
 
     heatmap.setMap(map);
