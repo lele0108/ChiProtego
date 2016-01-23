@@ -155,11 +155,13 @@
         center: sanFrancisco,
         zoom: 13,
         styles: styleArray,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
       });
+
+     //map.setMapTypeId(google.maps.MapTypeId.ROADMAP)
 
       var heatmap = new google.maps.visualization.HeatmapLayer({
         data: heatmapData,
+        styles: styleArray,
         map: map
       });
      // heatmap.setMap(map);
