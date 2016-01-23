@@ -52,4 +52,25 @@ var CrimesMap = React.createClass({
   }
 });
 
-ReactDOM.render(<CrimesMap />, document.getElementById('react'));
+var Sidebar = React.createClass({
+  render: function() {
+    return (
+      <div id="sidebar">
+        <h1>Sidebar</h1>
+      </div>
+    ) 
+  }
+});
+
+var Content = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <Sidebar />
+        <CrimesMap />
+      </div>   
+    )
+  }
+});
+
+ReactDOM.render(<Content />, document.getElementById('react'));

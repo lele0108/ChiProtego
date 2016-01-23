@@ -60,4 +60,33 @@ var CrimesMap = React.createClass({
   }
 });
 
-ReactDOM.render(React.createElement(CrimesMap, null), document.getElementById('react'));
+var Sidebar = React.createClass({
+  displayName: 'Sidebar',
+
+  render: function () {
+    return React.createElement(
+      'div',
+      { id: 'sidebar' },
+      React.createElement(
+        'h1',
+        null,
+        'Sidebar'
+      )
+    );
+  }
+});
+
+var Content = React.createClass({
+  displayName: 'Content',
+
+  render: function () {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(Sidebar, null),
+      React.createElement(CrimesMap, null)
+    );
+  }
+});
+
+ReactDOM.render(React.createElement(Content, null), document.getElementById('react'));
