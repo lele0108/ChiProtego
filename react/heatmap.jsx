@@ -1,5 +1,4 @@
 var CRIMES_API = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
-
 Parse.initialize("bTjai3wsSTvMmBPCyLFjPUHHSQYOUt4qOecyE8eh", "P7ARareRYBpxqoaU6CrDXr8cP5vv6wkuykeub6Ee");
 
 var HeatMap = React.createClass({
@@ -17,7 +16,7 @@ var HeatMap = React.createClass({
       fillColor: '#82CAFA',
       fillOpacity: 0.35,
       map: map,
-      center: {lat: 39.9521950, lng: -75.1911030},
+      center: this.props.circleCenter,
       radius: 250
     });
 
@@ -33,11 +32,30 @@ var CrimesMap = React.createClass({
   getInitialState: function() {
     return {
       points: null,
+      childLocation: {lat: null, lng: null},
       options: {zoom: 13, center: {lat: 39.9521950, lng: -75.1911030}, mapTypeId: google.maps.MapTypeId.ROADMAP}
     };
   },
 
   componentDidMount: function() {
+    this.loadCrimes();
+    this.loadChild();
+  },
+
+  loadChild: function() {
+    var that = this;
+
+    var Child = Parse.Object.extend('Child');
+    var query = new Parse.Query(Child);
+    query.limit(1);
+    query.find({
+      success: function(child) {
+        that.setState({childLocation: {lat: child[0].get("latitude"), lng: child[0].get("longitude")}});
+      } 
+    });
+  },
+
+  loadCrimes: function() {
     var that = this;
     var results = [];
     var points = [];
@@ -87,10 +105,9 @@ var CrimesMap = React.createClass({
     });
   },
 
-
   render: function() {
-    if (this.state.points) {
-      return <HeatMap points={this.state.points} options={this.state.options} />
+    if (this.state.points && this.state.childLocation) {
+      return <HeatMap points={this.state.points} options={this.state.options} circleCenter={this.state.childLocation} />
     } else {
       return <div>Loading...</div> 
     }
