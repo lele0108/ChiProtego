@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
+      html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
       #map { height: 100%; }
     </style>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -16,8 +16,43 @@
   <body>
     
 
-    <div id="leftNavBar" class="col-md-2" style="float: left; height: 100%; background-color: red; z-index: 100;">hi</div>
-<div id="map"></div>
+    <div id="leftNavBar" class="col-md-2 col-md-offset-10" style="float: left; height: 100%; position: fixed; background-color: rgba(255,255,255,0.5); z-index: 100;">
+      <img src="logo.png" style="width: 100%; margin-top: 10px; background-color: rgba(255,255,255,0.6);">
+      
+      <div style="width: 100%; margin-top: 10px; height: 60%; background-color:rgba(255,255,255,0.6);">
+        <table class="table">
+            <thead>
+                  <tr>
+                      <th>Directions</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>1</td>
+                      
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      
+                  </tr>
+                  <tr>
+                      <td>3</td>
+                      
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+
+
+        <div style="width: 100%; margin-top: 10px; height: 15%; background-color:rgba(255,255,255,0.6);"></div>
+        <div style="width: 100%; margin-top: 10px; height: 10%; background-color:rgba(255,255,255,0.6);"></div>
+      </div>
+
+
+
+
+  <div id="map"></div>
 
 
     <script type="text/javascript">
