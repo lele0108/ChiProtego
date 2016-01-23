@@ -19,26 +19,59 @@
     <div id="leftNavBar" class="col-md-2 col-md-offset-10" style="float: left; height: 100%; position: fixed; background-color: rgba(255,255,255,0.5); z-index: 100;">
       <img src="logo.png" style="width: 100%; margin-top: 10px; background-color: rgba(255,255,255,0.6);">
       
-      <div style="width: 100%; margin-top: 10px; height: 60%; background-color:rgba(255,255,255,0.6);">
+      <div style="width: 100%; margin-top: 10px; height: 60%; background-color:rgba(255,255,255,0.6); overflow-y: scroll;">
         <table class="table">
             <thead>
                   <tr>
-                      <th>Directions</th>
-                      <th></th>
+                      <th style="width: 80%;">Directions</th>
+                      <th style="width: 20%;"></th>
                   </tr>
               </thead>
               <tbody>
                   <tr>
-                      <td>1</td>
-                      
+                      <td>Turn left onto Church Rd </td>
+                      <td><img src="img/right.png" style="width: 100%;"></td>
                   </tr>
                   <tr>
-                      <td>2</td>
-                      
+                      <td>Turn right onto Central Ave </td>
+                      <td><img src="img/up.png" style="width: 100%;"></td> 
+                  </tr>
+                   <tr>
+                      <td>Use the right lane to take the ramp onto MD-202 N/Landover Rd </td>
+                      <td><img src="img/right.png" style="width: 100%;"></td>
                   </tr>
                   <tr>
-                      <td>3</td>
-                      
+                      <td>Slight right to merge onto US-50 W </td>
+                      <td><img src="img/left.png" style="width: 100%;"></td> 
+                  </tr>
+                   <tr>
+                      <td>Keep left to stay on US-50 W </td>
+                      <td><img src="img/down.png" style="width: 100%;"></td>
+                  </tr>
+                  <tr>
+                      <td>Continue straight onto New York Ave NW</td>
+                      <td><img src="img/up.png" style="width: 100%;"></td> 
+                  </tr>
+                   <tr>
+                      <td>Continue onto Mt Vernon Pl NW </td>
+                      <td><img src="img/right.png" style="width: 100%;"></td>
+                  </tr>
+                  <tr>
+                      <td>Continue onto Massachusetts Ave NW </td>
+                      <td><img src="img/left.png" style="width: 100%;"></td> 
+                  </tr>
+                  
+                   <tr>
+                      <td>Continue straight onto New York Ave NW</td>
+                      <td><img src="img/up.png" style="width: 100%;"></td> 
+                  </tr>
+                   <tr>
+                      <td>Enter Scott Cir NW </td>
+                      <td><img src="img/right.png" style="width: 100%;"></td>
+                  </tr>
+                  <tr>
+                      <td>You reached!</td>
+                      <td><img src="img/reach.png" style="width: 100%;"></td> 
                   </tr>
               </tbody>
           </table>
@@ -52,16 +85,34 @@
 
 
 
+
+
   <div id="map"></div>
 
 
     <script type="text/javascript">
 
       var map;
+
+      var styleArray = [
+  {
+    "stylers": [
+      { "visibility": "on" },
+      { "weight": 1.6 },
+      { "saturation": 13 },
+      { "lightness": 23 },
+      { "gamma": 0.67 },
+      { "hue": "#0088ff" }
+    ]
+  },{
+  }
+]
+
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          styles: styleArray,
+          zoom: 11
         });
       }
 
