@@ -1,3 +1,17 @@
+ var styleArray = [
+        {
+          "stylers": [
+            { "visibility": "on" },
+            { "weight": 1.6 },
+            { "saturation": 13 },
+            { "lightness": 23 },
+            { "gamma": 0.67 },
+            { "hue": "#0088ff" }
+          ]
+        },{
+        }
+      ]
+
 var CRIMES_API = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
 
 
@@ -22,7 +36,8 @@ var CrimesMap = React.createClass({
   getInitialState: function() {
     return {
       points: null,
-      options: {zoom: 13, center: {lat: 39.9521950, lng: -75.1911030}, mapTypeId: google.maps.MapTypeId.SATELLITE}
+      styles: styleArray,
+      options: {zoom: 13, center: {lat: 39.9521950, lng: -75.1911030}, mapTypeId: google.maps.MapTypeId.ROADMAP}
     };
   },
 
