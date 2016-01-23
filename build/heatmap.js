@@ -30,19 +30,47 @@ var CrimesMap = React.createClass({
 
   componentDidMount: function () {
     var that = this;
+    var results = [];
+    var points = [];
 
     $.ajax({
       url: CRIMES_API,
       dataType: 'json',
       type: 'GET',
       success: function (data) {
-        var points = [];
-        var results = data.results;
-        for (var i = 0; i < results.length; i++) {
-          points.push(new google.maps.LatLng(results[i].location_coordinates[0].latitude, results[i].location_coordinates[0].longitude));
-        }
 
-        that.setState({ points: points });
+        console.log(data.next);
+        var results = data.results;
+
+        $.ajax({
+          url: CRIMES_API + '&page=2',
+          dataType: 'json',
+          type: 'GET',
+          success: function (data) {
+            results = results.concat(data.results);
+            $.ajax({
+              url: CRIMES_API + '&page=3',
+              dataType: 'json',
+              type: 'GET',
+              success: function (data) {
+                results = results.concat(data.results);
+                $.ajax({
+                  url: CRIMES_API + '&page=4',
+                  dataType: 'json',
+                  type: 'GET',
+                  success: function (data) {
+                    results = results.concat(data.results);
+                    console.log(results);
+                    for (var i = 0; i < results.length; i++) {
+                      points.push(new google.maps.LatLng(results[i].location_coordinates[0].latitude, results[i].location_coordinates[0].longitude));
+                    }
+                    that.setState({ points: points });
+                  }
+                });
+              }
+            });
+          }
+        });
       }
     });
   },
