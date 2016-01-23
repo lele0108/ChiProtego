@@ -60,7 +60,7 @@ var CrimesMap = React.createClass({
       success: function(child) {
         for (i = 0; i < child.length; i++) {
           if (i == child.length-1) {
-            that.setState({childLocation: {lat: child[i].get("latitude"), lng: child[i].get("longitude")}});
+            that.setState({childLocation: {lat: child[i].get("latitude"), lng: child[i].get("longitude"), time: child[i].get("createdAt")}});
           } else {
             prevLoc.push({lat: child[i].get("latitude"), lng: child[i].get("longitude"), time: child[i].get("createdAt")});
           }
