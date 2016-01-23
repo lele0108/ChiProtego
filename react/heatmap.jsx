@@ -101,21 +101,11 @@ var CrimesMap = React.createClass({
   }
 });
 
-var Sidebar = React.createClass({
-  render: function() {
-    return (
-      <div id="sidebar">
-        <h1>Sidebar</h1>
-      </div>
-    ) 
-  }
-});
 
 var Content = React.createClass({
   render: function() {
     return (
       <div>
-        <Sidebar />
         <CrimesMap />
       </div>   
     )

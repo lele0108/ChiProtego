@@ -1,7 +1,11 @@
+var styleArray = [{
+  "stylers": [{ "visibility": "on" }, { "weight": 1.6 }, { "saturation": 13 }, { "lightness": 23 }, { "gamma": 0.67 }, { "hue": "#0088ff" }]
+}, {}];
+
 var CRIMES_API = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
 
 var HeatMap = React.createClass({
-  displayName: 'HeatMap',
+  displayName: "HeatMap",
 
   componentDidMount: function () {
     var map = new google.maps.Map(ReactDOM.findDOMNode(this), this.props.options);
@@ -14,17 +18,18 @@ var HeatMap = React.createClass({
   },
 
   render: function () {
-    return React.createElement('div', { id: 'map' });
+    return React.createElement("div", { id: "map" });
   }
 });
 
 var CrimesMap = React.createClass({
-  displayName: 'CrimesMap',
+  displayName: "CrimesMap",
 
   getInitialState: function () {
     return {
       points: null,
-      options: { zoom: 13, center: { lat: 39.9521950, lng: -75.1911030 }, mapTypeId: google.maps.MapTypeId.SATELLITE }
+      styles: styleArray,
+      options: { zoom: 13, center: { lat: 39.9521950, lng: -75.1911030 }, mapTypeId: google.maps.MapTypeId.ROADMAP }
     };
   },
 
@@ -80,38 +85,21 @@ var CrimesMap = React.createClass({
       return React.createElement(HeatMap, { points: this.state.points, options: this.state.options });
     } else {
       return React.createElement(
-        'div',
+        "div",
         null,
-        'Loading...'
+        "Loading..."
       );
     }
   }
 });
 
-var Sidebar = React.createClass({
-  displayName: 'Sidebar',
-
-  render: function () {
-    return React.createElement(
-      'div',
-      { id: 'sidebar' },
-      React.createElement(
-        'h1',
-        null,
-        'Sidebar'
-      )
-    );
-  }
-});
-
 var Content = React.createClass({
-  displayName: 'Content',
+  displayName: "Content",
 
   render: function () {
     return React.createElement(
-      'div',
+      "div",
       null,
-      React.createElement(Sidebar, null),
       React.createElement(CrimesMap, null)
     );
   }
