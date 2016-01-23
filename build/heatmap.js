@@ -11,6 +11,14 @@ var HeatMap = React.createClass({
       map: map
     });
 
+    for (i = 0; i < this.props.prevLoc.length; i++) {
+      var marker = new google.maps.Marker({
+        position: this.props.prevLoc[i],
+        map: map,
+        title: 'Previous Location'
+      });
+    }
+
     var circle = new google.maps.Circle({
       strokeColor: '#82CAFA',
       strokeOpacity: 0.8,
@@ -36,8 +44,9 @@ var CrimesMap = React.createClass({
   getInitialState: function () {
     return {
       points: null,
+      prevLoc: null,
       childLocation: { lat: null, lng: null },
-      options: { zoom: 13, center: { lat: 39.9521950, lng: -75.1911030 }, mapTypeId: google.maps.MapTypeId.ROADMAP }
+      options: { zoom: 14, center: { lat: 39.9521950, lng: -75.1911030 }, mapTypeId: google.maps.MapTypeId.ROADMAP }
     };
   },
 
@@ -48,13 +57,20 @@ var CrimesMap = React.createClass({
 
   loadChild: function () {
     var that = this;
-
+    var prevLoc = [];
     var Child = Parse.Object.extend('Child');
     var query = new Parse.Query(Child);
-    query.limit(1);
     query.find({
       success: function (child) {
-        that.setState({ childLocation: { lat: child[0].get("latitude"), lng: child[0].get("longitude") } });
+        for (i = 0; i < child.length; i++) {
+          if (i == child.length - 1) {
+            that.setState({ childLocation: { lat: child[i].get("latitude"), lng: child[i].get("longitude") } });
+          } else {
+            prevLoc.push({ lat: child[i].get("latitude"), lng: child[i].get("longitude"), time: child[i].get("createdAt") });
+          }
+        }
+        that.setState({ prevLoc: prevLoc });
+        console.log(prevLoc);
       }
     });
   },
@@ -108,7 +124,7 @@ var CrimesMap = React.createClass({
 
   render: function () {
     if (this.state.points && this.state.childLocation) {
-      return React.createElement(HeatMap, { points: this.state.points, options: this.state.options, circleCenter: this.state.childLocation });
+      return React.createElement(HeatMap, { points: this.state.points, options: this.state.options, circleCenter: this.state.childLocation, prevLoc: this.state.prevLoc });
     } else {
       return React.createElement(
         "div",

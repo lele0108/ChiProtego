@@ -9,3 +9,21 @@
   position: absolute;
   padding-left: 10px;
 }
+
+.about h1 {
+	font-weight:500;
+	font-size: 20px;
+	margin-top:0px;
+}
+
+.about h3 {
+	font-weight:400;
+	font-size:14px;
+	color: #7f8c8d;
+}
+
+.about h2 {
+	font-weight:300;
+	font-size:30px;
+	margin-top: 0px;
+}
