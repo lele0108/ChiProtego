@@ -1,9 +1,30 @@
 var CRIMES_JSON = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
 
-var Crimes = React.createClass({
+var HeatMap = React.createClass({
+  componentDidMount: function() {
+    var map = new google.maps.Map(ReactDOM.findDOMNode(this), {
+      zoom: 13,
+      center: {lat: 39.9521950, lng: -75.1911030},
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    });
+
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+      data: this.props.points,
+      map: map
+    });
+
+    heatmap.setMap(map);
+  },
+
+  render: function() {
+    return <div id="map" />
+  }
+});
+
+var CrimesMap = React.createClass({
   getInitialState: function() {
     return {
-      crimes: []
+      points: null
     };
   },
 
@@ -15,15 +36,24 @@ var Crimes = React.createClass({
       dataType: 'json',
       type: 'GET',
       success: function(data) {
-        that.setState({crimes: data.results});
+        var points = [];
+        var results = data.results;
+        for (var i=0; i<results.length; i++) {
+          points.push(new google.maps.LatLng(results[i].location_coordinates[0].latitude, results[i].location_coordinates[0].longitude));
+        }
+
+        that.setState({points: points});
       }
     });
   },
 
   render: function() {
-    console.log(this.state.crimes);
-    return <div>Hello World</div>  
+    if (this.state.points) {
+      return <HeatMap points={this.state.points} />
+    } else {
+      return <div>Loading...</div> 
+    }
   }
 });
 
-ReactDOM.render(<Crimes />, document.getElementById('react'));
+ReactDOM.render(<CrimesMap />, document.getElementById('react'));
