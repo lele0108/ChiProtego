@@ -1,6 +1,6 @@
 var HeatMap = React.createClass({
   render: function() {
-    return <div>Heat Map</div>; 
+    return <div>Heat Map</div>;
   }
 });
 
