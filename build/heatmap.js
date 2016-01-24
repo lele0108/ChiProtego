@@ -313,6 +313,19 @@ var SideBar = React.createClass({
               "View Map"
             )
           )
+        ),
+        React.createElement(
+          "div",
+          { className: "red" },
+          React.createElement(
+            "button",
+            { className: "r" },
+            React.createElement(
+              "h1",
+              null,
+              "EMERGENCY"
+            )
+          )
         )
       );
     } else {

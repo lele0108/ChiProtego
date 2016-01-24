@@ -129,7 +129,30 @@ h1, h2, h3, h4, h5, p {
 
 .history {
   width: 100%;
-  height: 54%;
+  height: 44%;
   overflow-y: scroll;
   padding-left: 30px;
+}
+
+.red {
+	width:100%;
+	height:10%;
+	background-color: #c0392b;
+}
+
+.r {
+	background-color: #c0392b;
+	width:100%;
+	height:100%;
+	border: 0px;
+}
+
+.r h1 {
+	margin: 0px 0px 13px 0px;
+	font-size:18px;
+	font-weight:600;
+}
+
+.r:hover {
+	background-color: #e74c3c;
 }

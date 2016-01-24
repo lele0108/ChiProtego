@@ -191,6 +191,7 @@ var SideBar = React.createClass({
             <div className="col-md-12"><p>{this.state.streets[1]}</p></div>
             <div className="col-md-12"><button className="go">View Map</button></div>
           </div>
+          <div className="red"><button className="r"><h1>EMERGENCY</h1></button></div>
         </div>
       )
     } else {
