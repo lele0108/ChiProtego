@@ -88,27 +88,61 @@ var CrimesMap = React.createClass({
         var results = data.results;
 
         $.ajax({
-          url: CRIMES_API + '&page=2',
+          url: CRIMES_API + '&page=17',
           dataType: 'json',
           type: 'GET',
           success: function(data) {
             results = results.concat(data.results);
             $.ajax({
-              url: CRIMES_API + '&page=3',
+              url: CRIMES_API + '&page=16',
               dataType: 'json',
               type: 'GET',
               success: function(data) {
                 results = results.concat(data.results);
                 $.ajax({
-                  url: CRIMES_API + '&page=4',
+                  url: CRIMES_API + '&page=15',
                   dataType: 'json',
                   type: 'GET',
                   success: function(data) {
                     results = results.concat(data.results);
-                    for (var i=0; i<results.length; i++) {
-                      points.push(new google.maps.LatLng(results[i].location_coordinates[0].latitude, results[i].location_coordinates[0].longitude));
-                    }
-                    that.setState({points: points});
+                    $.ajax({
+                      url: CRIMES_API + '&page=13',
+                      dataType: 'json',
+                      type: 'GET',
+                      success: function(data) {
+                        results = results.concat(data.results);
+                        $.ajax({
+                          url: CRIMES_API + '&page=14',
+                          dataType: 'json',
+                          type: 'GET',
+                          success: function(data) {
+                            results = results.concat(data.results);
+                            $.ajax({
+                              url: CRIMES_API + '&page=12',
+                              dataType: 'json',
+                              type: 'GET',
+                              success: function(data) {
+                                results = results.concat(data.results);
+                                $.ajax({
+                                  url: CRIMES_API + '&page=11',
+                                  dataType: 'json',
+                                  type: 'GET',
+                                  success: function(data) {
+                                    results = results.concat(data.results);
+                                    console.log(results);
+                                    for (var i=0; i<results.length; i++) {
+                                      points.push(new google.maps.LatLng(results[i].location_coordinates[0].latitude, results[i].location_coordinates[0].longitude));
+                                      console.log(results[i].item_date);
+                                    }
+                                    that.setState({points: points});
+                                  }
+                                });
+                              }
+                            });
+                          }
+                        });
+                      }
+                    });
                   }
                 });
 
