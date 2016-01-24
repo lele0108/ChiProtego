@@ -164,6 +164,14 @@ var SideBar = React.createClass({
 
   },
 
+  onEmergency: function() {
+    console.log('fadsfsd');
+    Parse.Push.send({
+      where: new Parse.Query(Parse.Installation),
+      data: {alert: 'GTFO'},
+    });
+  },
+
   render: function() {
     if (this.state.child && this.state.streets) {
       return (
@@ -191,7 +199,7 @@ var SideBar = React.createClass({
             <div className="col-md-12"><p>{this.state.streets[1]}</p></div>
             <div className="col-md-12"><button className="go">View Map</button></div>
           </div>
-          <div className="red"><button className="r"><h1>EMERGENCY</h1></button></div>
+          <div className="red"><button className="r" onClick={this.onEmergency}><h1>EMERGENCY</h1></button></div>
         </div>
       )
     } else {
@@ -199,7 +207,6 @@ var SideBar = React.createClass({
     }
   }
 });
-
 
 var Content = React.createClass({
   render: function() {

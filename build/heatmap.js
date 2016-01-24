@@ -170,6 +170,14 @@ var SideBar = React.createClass({
     });
   },
 
+  onEmergency: function () {
+    console.log('fadsfsd');
+    Parse.Push.send({
+      where: new Parse.Query(Parse.Installation),
+      data: { alert: 'GTFO' }
+    });
+  },
+
   render: function () {
     if (this.state.child && this.state.streets) {
       return React.createElement(
@@ -319,7 +327,7 @@ var SideBar = React.createClass({
           { className: "red" },
           React.createElement(
             "button",
-            { className: "r" },
+            { className: "r", onClick: this.onEmergency },
             React.createElement(
               "h1",
               null,
