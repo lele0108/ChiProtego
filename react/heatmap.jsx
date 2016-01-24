@@ -131,11 +131,47 @@ var CrimesMap = React.createClass({
   }
 });
 
+var SideBar = React.createClass({
+  render: function() {
+    return (
+      <div id="rightNavBar" className="col-md-3 nopadding">
+        <div className="about">
+          <img src="img/test.png" className="col-md-3" style={{borderRadius: '50%'}} width="50px" />
+          <div className="col-md-8" ><h1 style={{marginTop: '18px'}}>Aakash Adesara </h1></div>
+        </div>
+
+        <div className="location"> 
+          <div className="col-md-12"><h3>LOCATION DETAILS</h3></div><br /><br /><br />
+          <div className="col-md-12"><h5>Last Update: </h5></div>
+          <div className="col-md-12"><p>TODAY, 2:12 PM</p></div>
+          <br />
+          <div className="col-md-12"><h5>Last Location: </h5></div>
+          <div className="col-md-12"><p>Shake Shack, Drexel University</p></div>
+          <br />
+          <div className="col-md-12"><h5>Last Update: </h5></div>
+          <div className="col-md-12"><p>TODAY, 2:12 PM</p></div>
+        </div>
+
+        <div className="history">
+          <div className="col-md-12"><h3>AAKASH'S HISTORY</h3></div><br /><br /><br />
+          <div className="col-md-12"><h5>25 Mintes Ago: </h5></div>
+          <div className="col-md-12"><p>29521 Jackson Street</p></div>
+          <div className="col-md-12"><button className="go">View Map</button></div>
+          <div className="col-md-12"><h5>1 Hour Ago: </h5></div>
+          <div className="col-md-12"><p>29521 Jackson Street</p></div>
+          <div className="col-md-12"><button className="go">View Map</button></div>
+        </div>
+      </div>
+    )
+  }
+});
+
 
 var Content = React.createClass({
   render: function() {
     return (
       <div>
+        <SideBar />
         <CrimesMap />
       </div>   
     )

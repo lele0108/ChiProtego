@@ -136,6 +136,173 @@ var CrimesMap = React.createClass({
   }
 });
 
+var SideBar = React.createClass({
+  displayName: "SideBar",
+
+  render: function () {
+    return React.createElement(
+      "div",
+      { id: "rightNavBar", className: "col-md-3 nopadding" },
+      React.createElement(
+        "div",
+        { className: "about" },
+        React.createElement("img", { src: "img/test.png", className: "col-md-3", style: { borderRadius: '50%' }, width: "50px" }),
+        React.createElement(
+          "div",
+          { className: "col-md-8" },
+          React.createElement(
+            "h1",
+            { style: { marginTop: '18px' } },
+            "Aakash Adesara "
+          )
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "location" },
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h3",
+            null,
+            "LOCATION DETAILS"
+          )
+        ),
+        React.createElement("br", null),
+        React.createElement("br", null),
+        React.createElement("br", null),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h5",
+            null,
+            "Last Update: "
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "p",
+            null,
+            "TODAY, 2:12 PM"
+          )
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h5",
+            null,
+            "Last Location: "
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "p",
+            null,
+            "Shake Shack, Drexel University"
+          )
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h5",
+            null,
+            "Last Update: "
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "p",
+            null,
+            "TODAY, 2:12 PM"
+          )
+        )
+      ),
+      React.createElement(
+        "div",
+        { className: "history" },
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h3",
+            null,
+            "AAKASH'S HISTORY"
+          )
+        ),
+        React.createElement("br", null),
+        React.createElement("br", null),
+        React.createElement("br", null),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h5",
+            null,
+            "25 Mintes Ago: "
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "p",
+            null,
+            "29521 Jackson Street"
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "button",
+            { className: "go" },
+            "View Map"
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "h5",
+            null,
+            "1 Hour Ago: "
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "p",
+            null,
+            "29521 Jackson Street"
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "col-md-12" },
+          React.createElement(
+            "button",
+            { className: "go" },
+            "View Map"
+          )
+        )
+      )
+    );
+  }
+});
+
 var Content = React.createClass({
   displayName: "Content",
 
@@ -143,6 +310,7 @@ var Content = React.createClass({
     return React.createElement(
       "div",
       null,
+      React.createElement(SideBar, null),
       React.createElement(CrimesMap, null)
     );
   }
