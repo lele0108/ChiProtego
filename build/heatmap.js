@@ -30,6 +30,7 @@ var HeatMap = React.createClass({
       radius: 250
     });
 
+    heatmap.set('radius', 50);
     heatmap.setMap(map);
   },
 

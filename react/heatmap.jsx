@@ -6,7 +6,7 @@ var HeatMap = React.createClass({
     var map = new google.maps.Map(ReactDOM.findDOMNode(this), this.props.options);
     var heatmap = new google.maps.visualization.HeatmapLayer({
       data: this.props.points,
-      map: map
+      map: map,
     });
 
     for (i = 0; i < this.props.prevLoc.length; i++) {
@@ -28,6 +28,7 @@ var HeatMap = React.createClass({
       radius: 250
     });
 
+    heatmap.set('radius', 50);
     heatmap.setMap(map);
   },
 
