@@ -192,10 +192,10 @@ var SideBar = React.createClass({
 
           <div className="history">
             <div className="col-md-12"><h3>AAKASH'S HISTORY</h3></div><br /><br /><br />
-            <div className="col-md-12"><h5>{moment(this.state.child[this.state.child.length-1].get('createdAt')).fromNow()}: </h5></div>
+            <div className="col-md-12"><h5>{moment(this.state.child[1].get('createdAt')).fromNow()}: </h5></div>
             <div className="col-md-12"><p>{this.state.streets[0]}</p></div>
             <div className="col-md-12"><button className="go">View Map</button></div>
-            <div className="col-md-12"><h5>{moment(this.state.child[this.state.child.length-2].get('createdAt')).fromNow()}: </h5></div>
+            <div className="col-md-12"><h5>{moment(this.state.child[2].get('createdAt')).fromNow()}: </h5></div>
             <div className="col-md-12"><p>{this.state.streets[1]}</p></div>
             <div className="col-md-12"><button className="go">View Map</button></div>
           </div>

@@ -271,7 +271,7 @@ var SideBar = React.createClass({
             React.createElement(
               "h5",
               null,
-              moment(this.state.child[this.state.child.length - 1].get('createdAt')).fromNow(),
+              moment(this.state.child[1].get('createdAt')).fromNow(),
               ": "
             )
           ),
@@ -299,7 +299,7 @@ var SideBar = React.createClass({
             React.createElement(
               "h5",
               null,
-              moment(this.state.child[this.state.child.length - 2].get('createdAt')).fromNow(),
+              moment(this.state.child[2].get('createdAt')).fromNow(),
               ": "
             )
           ),
