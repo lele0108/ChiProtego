@@ -160,10 +160,10 @@ var SideBar = React.createClass({
         that.setState({ child: child });
         var streets = [];
         $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ child[child.length - 1].get('latitude') },${ child[child.length - 1].get('longitude') }&key=AIzaSyAp_CEJWpEwTNfREe5Qfgc01nKiy5-a93o`, function (data) {
-          streets.push(data.results[0].formatted_address);
+          streets.push(`${ data.results[0].address_components[0].long_name } ${ data.results[0].address_components[1].long_name }`);
         });
         $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ child[child.length - 2].get('latitude') },${ child[child.length - 2].get('longitude') }&key=AIzaSyAp_CEJWpEwTNfREe5Qfgc01nKiy5-a93o`, function (data) {
-          streets.push(data.results[0].formatted_address);
+          streets.push(`${ data.results[0].address_components[0].long_name } ${ data.results[0].address_components[1].long_name }`);
           that.setState({ streets: streets });
         });
       }
