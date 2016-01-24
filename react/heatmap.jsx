@@ -1,4 +1,5 @@
 var CRIMES_API = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
+
 Parse.initialize("bTjai3wsSTvMmBPCyLFjPUHHSQYOUt4qOecyE8eh", "P7ARareRYBpxqoaU6CrDXr8cP5vv6wkuykeub6Ee");
 
 var HeatMap = React.createClass({
@@ -132,37 +133,69 @@ var CrimesMap = React.createClass({
 });
 
 var SideBar = React.createClass({
+  getInitialState: function() {
+    return {
+      child: null,
+      streets: [],
+    };
+  },
+
+  componentDidMount: function() {
+    this.loadChild();
+  },
+
+  loadChild: function() {
+    var that = this;
+    var Child = Parse.Object.extend('Child');
+    var query = new Parse.Query(Child);
+    query.find({
+      success: function(child) {
+        that.setState({child: child});
+        var streets = [];
+        $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${child[child.length-1].get('latitude')},${child[child.length-1].get('longitude')}&key=AIzaSyAp_CEJWpEwTNfREe5Qfgc01nKiy5-a93o`, function(data) {
+          streets.push(data.results[0].formatted_address);
+        });
+        $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${child[child.length-2].get('latitude')},${child[child.length-2].get('longitude')}&key=AIzaSyAp_CEJWpEwTNfREe5Qfgc01nKiy5-a93o`, function(data) {
+          streets.push(data.results[0].formatted_address);
+          that.setState({streets: streets});
+        });
+      }
+    });
+
+  },
+
   render: function() {
-    return (
-      <div id="rightNavBar" className="col-md-3 nopadding">
-        <div className="about">
-          <img src="img/test.png" className="col-md-3" style={{borderRadius: '50%'}} width="50px" />
-          <div className="col-md-8" ><h1 style={{marginTop: '18px'}}>Aakash Adesara </h1></div>
-        </div>
+    if (this.state.child && this.state.streets) {
+      return (
+        <div id="rightNavBar" className="col-md-3 nopadding">
+          <div className="about">
+            <img src="img/test.png" className="col-md-3" style={{borderRadius: '50%'}} width="50px" />
+            <div className="col-md-8" ><h1 style={{marginTop: '18px'}}>Aakash Adesara </h1></div>
+          </div>
 
-        <div className="location"> 
-          <div className="col-md-12"><h3>LOCATION DETAILS</h3></div><br /><br /><br />
-          <div className="col-md-12"><h5>Last Update: </h5></div>
-          <div className="col-md-12"><p>TODAY, 2:12 PM</p></div>
-          <br />
-          <div className="col-md-12"><h5>Last Location: </h5></div>
-          <div className="col-md-12"><p>Shake Shack, Drexel University</p></div>
-          <br />
-          <div className="col-md-12"><h5>Last Update: </h5></div>
-          <div className="col-md-12"><p>TODAY, 2:12 PM</p></div>
-        </div>
+          <div className="location"> 
+            <div className="col-md-12"><h3>LOCATION DETAILS</h3></div><br /><br /><br />
+            <div className="col-md-12"><h5>Last Update: </h5></div>
+            <div className="col-md-12"><p>{moment(this.state.child[this.state.child.length-1].get('createdAt')).calendar()}</p></div>
+            <br />
+            <div className="col-md-12"><h5>Last Location: </h5></div>
+            <div className="col-md-12"><p>{this.state.streets[0]}</p></div>
+          </div>
 
-        <div className="history">
-          <div className="col-md-12"><h3>AAKASH'S HISTORY</h3></div><br /><br /><br />
-          <div className="col-md-12"><h5>25 Mintes Ago: </h5></div>
-          <div className="col-md-12"><p>29521 Jackson Street</p></div>
-          <div className="col-md-12"><button className="go">View Map</button></div>
-          <div className="col-md-12"><h5>1 Hour Ago: </h5></div>
-          <div className="col-md-12"><p>29521 Jackson Street</p></div>
-          <div className="col-md-12"><button className="go">View Map</button></div>
+          <div className="history">
+            <div className="col-md-12"><h3>AAKASH'S HISTORY</h3></div><br /><br /><br />
+            <div className="col-md-12"><h5>{moment(this.state.child[this.state.child.length-1].get('createdAt')).fromNow()}: </h5></div>
+            <div className="col-md-12"><p>{this.state.streets[0]}</p></div>
+            <div className="col-md-12"><button className="go">View Map</button></div>
+            <div className="col-md-12"><h5>{moment(this.state.child[this.state.child.length-2].get('createdAt')).fromNow()}: </h5></div>
+            <div className="col-md-12"><p>{this.state.streets[1]}</p></div>
+            <div className="col-md-12"><button className="go">View Map</button></div>
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return <div>Loading...</div> 
+    }
   }
 });
 

@@ -1,4 +1,5 @@
 var CRIMES_API = 'https://api.everyblock.com/content/philly/topnews/?format=json&schema=crime&schema=announcements&token=90fe24d329973b71272faf3f5d17a8602bff996b';
+
 Parse.initialize("bTjai3wsSTvMmBPCyLFjPUHHSQYOUt4qOecyE8eh", "P7ARareRYBpxqoaU6CrDXr8cP5vv6wkuykeub6Ee");
 
 var HeatMap = React.createClass({
@@ -139,167 +140,188 @@ var CrimesMap = React.createClass({
 var SideBar = React.createClass({
   displayName: "SideBar",
 
+  getInitialState: function () {
+    return {
+      child: null,
+      streets: []
+    };
+  },
+
+  componentDidMount: function () {
+    this.loadChild();
+  },
+
+  loadChild: function () {
+    var that = this;
+    var Child = Parse.Object.extend('Child');
+    var query = new Parse.Query(Child);
+    query.find({
+      success: function (child) {
+        that.setState({ child: child });
+        var streets = [];
+        $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ child[child.length - 1].get('latitude') },${ child[child.length - 1].get('longitude') }&key=AIzaSyAp_CEJWpEwTNfREe5Qfgc01nKiy5-a93o`, function (data) {
+          streets.push(data.results[0].formatted_address);
+        });
+        $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ child[child.length - 2].get('latitude') },${ child[child.length - 2].get('longitude') }&key=AIzaSyAp_CEJWpEwTNfREe5Qfgc01nKiy5-a93o`, function (data) {
+          streets.push(data.results[0].formatted_address);
+          that.setState({ streets: streets });
+        });
+      }
+    });
+  },
+
   render: function () {
-    return React.createElement(
-      "div",
-      { id: "rightNavBar", className: "col-md-3 nopadding" },
-      React.createElement(
+    if (this.state.child && this.state.streets) {
+      return React.createElement(
         "div",
-        { className: "about" },
-        React.createElement("img", { src: "img/test.png", className: "col-md-3", style: { borderRadius: '50%' }, width: "50px" }),
+        { id: "rightNavBar", className: "col-md-3 nopadding" },
         React.createElement(
           "div",
-          { className: "col-md-8" },
+          { className: "about" },
+          React.createElement("img", { src: "img/test.png", className: "col-md-3", style: { borderRadius: '50%' }, width: "50px" }),
           React.createElement(
-            "h1",
-            { style: { marginTop: '18px' } },
-            "Aakash Adesara "
+            "div",
+            { className: "col-md-8" },
+            React.createElement(
+              "h1",
+              { style: { marginTop: '18px' } },
+              "Aakash Adesara "
+            )
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "location" },
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h3",
+              null,
+              "LOCATION DETAILS"
+            )
+          ),
+          React.createElement("br", null),
+          React.createElement("br", null),
+          React.createElement("br", null),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h5",
+              null,
+              "Last Update: "
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "p",
+              null,
+              moment(this.state.child[this.state.child.length - 1].get('createdAt')).calendar()
+            )
+          ),
+          React.createElement("br", null),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h5",
+              null,
+              "Last Location: "
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "p",
+              null,
+              this.state.streets[0]
+            )
+          )
+        ),
+        React.createElement(
+          "div",
+          { className: "history" },
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h3",
+              null,
+              "AAKASH'S HISTORY"
+            )
+          ),
+          React.createElement("br", null),
+          React.createElement("br", null),
+          React.createElement("br", null),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h5",
+              null,
+              moment(this.state.child[this.state.child.length - 1].get('createdAt')).fromNow(),
+              ": "
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "p",
+              null,
+              this.state.streets[0]
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "button",
+              { className: "go" },
+              "View Map"
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "h5",
+              null,
+              moment(this.state.child[this.state.child.length - 2].get('createdAt')).fromNow(),
+              ": "
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "p",
+              null,
+              this.state.streets[1]
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "col-md-12" },
+            React.createElement(
+              "button",
+              { className: "go" },
+              "View Map"
+            )
           )
         )
-      ),
-      React.createElement(
+      );
+    } else {
+      return React.createElement(
         "div",
-        { className: "location" },
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h3",
-            null,
-            "LOCATION DETAILS"
-          )
-        ),
-        React.createElement("br", null),
-        React.createElement("br", null),
-        React.createElement("br", null),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h5",
-            null,
-            "Last Update: "
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "p",
-            null,
-            "TODAY, 2:12 PM"
-          )
-        ),
-        React.createElement("br", null),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h5",
-            null,
-            "Last Location: "
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "p",
-            null,
-            "Shake Shack, Drexel University"
-          )
-        ),
-        React.createElement("br", null),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h5",
-            null,
-            "Last Update: "
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "p",
-            null,
-            "TODAY, 2:12 PM"
-          )
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "history" },
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h3",
-            null,
-            "AAKASH'S HISTORY"
-          )
-        ),
-        React.createElement("br", null),
-        React.createElement("br", null),
-        React.createElement("br", null),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h5",
-            null,
-            "25 Mintes Ago: "
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "p",
-            null,
-            "29521 Jackson Street"
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "button",
-            { className: "go" },
-            "View Map"
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "h5",
-            null,
-            "1 Hour Ago: "
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "p",
-            null,
-            "29521 Jackson Street"
-          )
-        ),
-        React.createElement(
-          "div",
-          { className: "col-md-12" },
-          React.createElement(
-            "button",
-            { className: "go" },
-            "View Map"
-          )
-        )
-      )
-    );
+        null,
+        "Loading..."
+      );
+    }
   }
 });
 
