@@ -58,6 +58,7 @@ var CrimesMap = React.createClass({
     var prevLoc = [];
     var Child = Parse.Object.extend('Child');
     var query = new Parse.Query(Child);
+    query.descending("createdAt");
     query.find({
       success: function(child) {
         for (i = 0; i < child.length; i++) {
@@ -84,7 +85,6 @@ var CrimesMap = React.createClass({
       type: 'GET',
       success: function(data) {
 
-        console.log(data.next);
         var results = data.results;
 
         $.ajax({
@@ -105,7 +105,6 @@ var CrimesMap = React.createClass({
                   type: 'GET',
                   success: function(data) {
                     results = results.concat(data.results);
-                    console.log(results);
                     for (var i=0; i<results.length; i++) {
                       points.push(new google.maps.LatLng(results[i].location_coordinates[0].latitude, results[i].location_coordinates[0].longitude));
                     }
@@ -148,6 +147,7 @@ var SideBar = React.createClass({
     var that = this;
     var Child = Parse.Object.extend('Child');
     var query = new Parse.Query(Child);
+    query.descending("createdAt");
     query.find({
       success: function(child) {
         that.setState({child: child});
@@ -165,7 +165,6 @@ var SideBar = React.createClass({
   },
 
   onEmergency: function() {
-    console.log('fadsfsd');
     Parse.Push.send({
       where: new Parse.Query(Parse.Installation),
       data: {alert: 'GTFO'},
@@ -174,6 +173,7 @@ var SideBar = React.createClass({
 
   render: function() {
     if (this.state.child && this.state.streets) {
+      console.log(this.state.child);
       return (
         <div id="rightNavBar" className="col-md-3 nopadding">
           <div className="about">
@@ -184,7 +184,7 @@ var SideBar = React.createClass({
           <div className="location"> 
             <div className="col-md-12"><h3>LOCATION DETAILS</h3></div><br /><br /><br />
             <div className="col-md-12"><h5>Last Update: </h5></div>
-            <div className="col-md-12"><p>{moment(this.state.child[this.state.child.length-1].get('createdAt')).calendar()}</p></div>
+            <div className="col-md-12"><p>{moment(this.state.child[0].get('createdAt')).calendar()}</p></div>
             <br />
             <div className="col-md-12"><h5>Last Location: </h5></div>
             <div className="col-md-12"><p>{this.state.streets[0]}</p></div>
