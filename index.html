@@ -18,6 +18,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,100 +28,43 @@
     <![endif]-->
   </head>
   <body>
-    
-    <div class="nav">
-      <div class="container-fluid">
-        <div class="row">
 
-          <div class="col-md-3">
-            <img src="logo.png" style="width: 50%">
-          </div>
-
-          <div class="col-md-6">
-
-          </div>
-
-          <div class="col-md-3">
-            <p class="text-right">Hello, Jessica Mane</p>
-          </div>
-        </div>
+    <div id="rightNavBar" class="col-md-3 nopadding" style="float: right; height: 100%; position: fixed; z-index: 100;">
+      
+      <div class="about" style="width: 100%; margin-top: 10px; padding-top: 10px; padding-left: 30px; height: 11%; ">
+            <img src="img/test.png" class="col-md-3" style="border-radius: 50%;" width="50px">
+            <div class="col-md-8" ><h1 style="margin-top: 18px">Aakash Adesara </h1></div>
       </div>
+
+      <div class="location" style="width: 100%; height: 35%; padding-left:30px; padding-top:10px;"> 
+            <div class="col-md-12"><h3>LOCATION DETAILS</h3></div><br><br><br>
+            <div class="col-md-12"><h5>Last Update: </h5></div>
+            <div class="col-md-12"><p>TODAY, 2:12 PM</p></div>
+            <br>
+            <div class="col-md-12"><h5>Last Location: </h5></div>
+            <div class="col-md-12"><p>Shake Shack, Drexel University</p></div>
+            <br>
+            <div class="col-md-12"><h5>Last Update: </h5></div>
+            <div class="col-md-12"><p>TODAY, 2:12 PM</p></div>
+      </div>
+
+      <div class="history" style="width: 100%; height: 54%; overflow-y: scroll; padding-left:30px;">
+        <div class="col-md-12"><h3>AAKASH'S HISTORY</h3></div><br><br><br>
+        <div class="col-md-12"><h5>25 Mintes Ago: </h5></div>
+        <div class="col-md-12"><p>29521 Jackson Street</p></div>
+        <div class="col-md-12"><button class="go">View Map</button></div>
+        <div class="col-md-12"><h5>1 Hour Ago: </h5></div>
+        <div class="col-md-12"><p>29521 Jackson Street</p></div>
+        <div class="col-md-12"><button class="go">View Map</button></div>
+      </div>
+    
     </div>
 
-    <div id="rightNavBar" class="col-md-3" style="float: right; height: 100%; position: fixed; background-color: rgba(255,255,255,0.8); z-index: 100; padding: 0px 25px 0px 25px; ">
-      
-      <div class="about" style="width: 100%; margin-top: 30px; padding-top: 15px; height: 15%; background-color:rgba(255,255,255,1.0);">
-            <img src="img/test.png" class="col-md-4" style="border-radius: 50%;" >
-            <div class="col-md-8" ><h1> Aakash Adesara <h1></div>
-            <div class="col-md-8"><h3>Last Located</h3></div>
-            <div class="col-md-8"><h2>2:12 PM</h2></div>
-            <div class="col-md-8 col-md-offset-4">Height: 5.5 ft</div>
-            <div class="col-md-8 col-md-offset-4">Weight: 140lb</div>
-            <div class="col-md-8 col-md-offset-4">Correctional Lenses</div>
-        </div>
-
-      <div style="width: 100%; margin-top: 30px; height: 60%; background-color:rgba(255,255,255,0.6); overflow-y: scroll;">
-        <table class="table">
-            <thead>
-                  <tr>
-                      <th style="width: 80%;">Last Known Locations</th>
-                      <th style="width: 20%;"></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>Turn left onto Church Rd </td>
-                      <td><img src="img/right.png" style="width: 50%;"></td>
-                  </tr>
-                  <tr>
-                      <td>Turn right onto Central Ave </td>
-                      <td><img src="img/up.png" style="width: 50%;"></td> 
-                  </tr>
-                   <tr>
-                      <td>Use the right lane to take the ramp onto MD-202 N/Landover Rd </td>
-                      <td><img src="img/right.png" style="width: 50%;"></td>
-                  </tr>
-                  <tr>
-                      <td>Slight right to merge onto US-50 W </td>
-                      <td><img src="img/left.png" style="width: 50%;"></td> 
-                  </tr>
-                   <tr>
-                      <td>Keep left to stay on US-50 W </td>
-                      <td><img src="img/down.png" style="width: 50%;"></td>
-                  </tr>
-                  <tr>
-                      <td>Continue straight onto New York Ave NW</td>
-                      <td><img src="img/up.png" style="width: 50%;"></td> 
-                  </tr>
-                   <tr>
-                      <td>Continue onto Mt Vernon Pl NW </td>
-                      <td><img src="img/right.png" style="width: 50%;"></td>
-                  </tr>
-                  <tr>
-                      <td>Continue onto Massachusetts Ave NW </td>
-                      <td><img src="img/left.png" style="width: 50%;"></td> 
-                  </tr>
-                  
-                   <tr>
-                      <td>Continue straight onto New York Ave NW</td>
-                      <td><img src="img/up.png" style="width: 50%;"></td> 
-                  </tr>
-                   <tr>
-                      <td>Enter Scott Cir NW </td>
-                      <td><img src="img/right.png" style="width: 50%;"></td>
-                  </tr>
-                  <tr>
-                      <td>You reached!</td>
-                      <td><img src="img/reach.png" style="width: 50%;"></td> 
-                  </tr>
-              </tbody>
-          </table>
-        </div>
-
-        <div style="width: 100%; margin-top: 10px; height: 10%; background-color:rgba(255,255,255,0.6);"></div>
-      </div>
-
     <div id="react"></div>
+
+    <div class="logo">
+      <img src="logo.png" style="width:125px"></img>
+    </div>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="https://fb.me/react-0.14.6.js"></script>

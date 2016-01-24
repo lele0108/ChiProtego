@@ -1,3 +1,25 @@
+h1, h2, h3, h4, h5, p {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.logo{
+  position:absolute;
+  top: 20px;
+  right:30px;
+  padding: 20px;
+  background-color: rgba(255,255,255,0.85);
+}
+
+.logo:hover {
+	background-color:white;
+}
+
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
 #map {
   width: 100%;
   height: 100%;
@@ -7,27 +29,78 @@
 
 #sidebar {
   position: absolute;
-  padding-left: 10px;
+  background-color: #1F1F1F;
 }
 
 .about h1 {
-	font-weight:500;
-	font-size: 20px;
+	font-weight:600;
+	font-size: 16px;
 	margin-top:0px;
+	color: #989898;
 }
 
-.about h3 {
-	font-weight:400;
+.location {
+	background-color: #1F1F1F;
+}
+
+.location h3 {
+	font-weight:700;
 	font-size:14px;
-	color: #7f8c8d;
+	color: #666666;
 }
 
-.about h2 {
+.location h2 {
 	font-weight:300;
 	font-size:30px;
 	margin-top: 0px;
 }
 
+.location h5 {
+	color: #666666;
+}
+
 .nav {
 	padding: 25px 25px 25px 25px;
+}
+
+#rightNavBar {
+	background-color: #000000;
+	color:white;
+}
+
+.about {
+
+}
+
+.history {
+	background-color: #1F1F1F;
+}
+
+.history h3 {
+	font-weight:700;
+	font-size:14px;
+	color: #666666;
+}
+
+.history h2 {
+	font-weight:300;
+	font-size:30px;
+	margin-top: 0px;
+}
+
+.history h5 {
+	color: #666666;
+}
+
+.go {
+	border: 0px;
+	color:#CBCBCB;
+	background-color:#363636;
+	padding: 10px 25px 10px 25px;
+	margin-top:5px;
+	margin-bottom: 20px;
+}
+
+.go:hover {
+	opacity:0.8;
 }
